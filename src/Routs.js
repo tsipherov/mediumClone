@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Article from "./pages/articles/Article";
-import Page2 from "./pages/articles/Page2";
+import Auth from "./pages/Auth/Auth";
 import GlobalFeed from "./pages/globalFeed/GlobalFeed";
 
 const Routs = () => {
@@ -8,7 +8,8 @@ const Routs = () => {
     <Routes>
       <Route path="/" element={<GlobalFeed />} />
       <Route path="/article" element={<Article />} />
-      <Route path="/page/*" element={<Page2 />} />
+      <Route path="/login" element={<Auth />} />
+      <Route path="/register" element={<Auth />} />
     </Routes>
   );
 };
