@@ -1,10 +1,14 @@
-import Routs from "Routs";
+import TopBar from "./components/TopBar/TopBar";
+import LengContext from "./LengContext";
+import Routs from "./Routs";
 
 function App() {
   return (
     <>
-      <h1>Hello world</h1>
-      <Routs />
+      <LengContext.Provider value={{ leng: "UA" }}>
+        <TopBar />
+        <Routs />
+      </LengContext.Provider>
     </>
   );
 }
