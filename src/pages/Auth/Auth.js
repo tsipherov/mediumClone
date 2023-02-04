@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, redirect, useLocation, useNavigate } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
-
-// const baseUrl = "https://conduit.productionready.io/api/users/login";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [isSaccessSubmit, setIsSaccessSubmit] = useState(false);
 
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
   const isLogin = pathname === "/login";
   const pageTitle = isLogin ? "Sign In" : "Sign Up";
   const descriptionLink = isLogin ? "/register" : "/login";
@@ -18,13 +19,17 @@ const Auth = () => {
 
   const [{ isLoading, response, error }, createFetchOptions] = useFetch(apiUrl);
 
-  console.log("response: ", response);
-  console.log("error: ", error);
+  useEffect(() => {
+    if (!response) return;
+    console.log(response);
+    localStorage.setItem("token", response.user.token);
+    setIsSaccessSubmit(true);
+  }, [response]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     const user = isLogin ? { email, password } : { username, email, password };
+
     createFetchOptions({
       method: "POST",
       data: {
@@ -32,6 +37,10 @@ const Auth = () => {
       },
     });
   };
+
+  if (isSaccessSubmit) {
+    return navigate("/");
+  }
 
   return (
     <div className="auth-page">
