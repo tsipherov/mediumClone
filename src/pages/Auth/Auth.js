@@ -11,6 +11,7 @@ const Auth = () => {
   const [username, setUsername] = useState("");
   const [isSaccessSubmit, setIsSaccessSubmit] = useState(false);
   const [currentUser, setCurrentUser] = useContext(UserContext);
+  console.log("currentUser: ", currentUser);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
