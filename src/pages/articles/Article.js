@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import LengContext from "../../LengContext";
+import { UserContext } from "../../contexts/userContext";
 
 function Article() {
-  const context = useContext(LengContext);
+  const context = useContext(UserContext);
   console.log(context.leng);
   return (
     // <LengContext.Consumer>

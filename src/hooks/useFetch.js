@@ -16,13 +16,14 @@ export const useFetch = (url) => {
 
   useEffect(() => {
     if (!isLoading) return;
-    console.log("options: ", options);
+    // console.log("options: ", options);
     axios(baseUrl + url, options)
       .then((res) => {
         setResponse(res.data);
         setIsLoading(false);
       })
       .catch((err) => {
+        console.log("err: ", err);
         setError(err.response.data);
         setIsLoading(false);
       });

@@ -1,14 +1,14 @@
 import TopBar from "./components/TopBar/TopBar";
-import LengContext from "./LengContext";
+import { UserProvider } from "./contexts/userContext";
 import Routs from "./Routs";
 
 function App() {
   return (
     <>
-      <LengContext.Provider value={{ leng: "UA" }}>
+      <UserProvider>
         <TopBar />
         <Routs />
-      </LengContext.Provider>
+      </UserProvider>
     </>
   );
 }

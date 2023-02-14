@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Link, redirect, useLocation, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { UserContext } from "../../contexts/userContext";
+import BackendErrorMessage from "../../components/BackendErrorMessage/BackendErrorMessage";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [isSaccessSubmit, setIsSaccessSubmit] = useState(false);
+  const [currentUser, setCurrentUser] = useContext(UserContext);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -21,15 +24,21 @@ const Auth = () => {
   const [{ isLoading, response, error }, createFetchOptions] = useFetch(apiUrl);
   const [token, setToken] = useLocalStorage("token");
 
-  console.log("token: ", token);
+  // console.log("cucurrentUser: ", currentUser);
+  // console.log("error: ", error);
   useEffect(() => {
     if (!response) return;
-    console.log(response);
-    // localStorage.setItem("token", response.user.token);
     setToken(response.user.token);
-
     setIsSaccessSubmit(true);
-  }, [response]);
+    setCurrentUser((state) => {
+      return {
+        ...state,
+        isLoading: false,
+        isLogedIn: true,
+        currentUser: response,
+      };
+    });
+  }, [response, setToken, error]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -57,6 +66,7 @@ const Auth = () => {
               <Link to={descriptionLink}>{descriptionText}</Link>
             </p>
             <form onSubmit={submitHandler}>
+              {error && <BackendErrorMessage backendError={error.errors} />}
               <fieldset>
                 {!isLogin && (
                   <fieldset className="form-group">
