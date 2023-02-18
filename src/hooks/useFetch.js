@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocalStorage } from "./useLocalStorage";
 
 export const useFetch = (url) => {
@@ -11,17 +11,20 @@ export const useFetch = (url) => {
   const baseUrl = "https://conduit.productionready.io/api";
 
   const [userToken] = useLocalStorage("token");
-  const createFetchOptions = (options = {}) => {
-    const requestOptions = {
-      ...options,
-      headers: {
-        authorization: userToken ? `Token ${userToken}` : "",
-      },
-    };
-    // console.log("requestOptions: ", requestOptions);
-    setOptions(requestOptions);
-    setIsLoading(true);
-  };
+  const createFetchOptions = useCallback(
+    (options = {}) => {
+      const requestOptions = {
+        ...options,
+        headers: {
+          authorization: userToken ? `Token ${userToken}` : "",
+        },
+      };
+      // console.log("requestOptions: ", requestOptions);
+      setOptions(requestOptions);
+      setIsLoading(true);
+    },
+    [userToken]
+  );
 
   useEffect(() => {
     if (!isLoading) return;
@@ -37,7 +40,7 @@ export const useFetch = (url) => {
         setError(err.response.data);
         setIsLoading(false);
       });
-  }, [isLoading]);
+  }, [isLoading, options, url]);
 
   return [{ isLoading, response, error }, createFetchOptions];
 };
