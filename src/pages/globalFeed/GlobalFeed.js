@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Feed from "../../components/Feed/Feed";
 import Pagination from "../../components/Pagination/Pagination";
+import PopularTags from "../../components/PopularTags/PopularTags";
 import { useFetch } from "../../hooks/useFetch";
 
 function GlobalFeed() {
@@ -9,22 +11,25 @@ function GlobalFeed() {
   const URL = `/articles?limit=${limit}&offset=${(page - 1) * limit}`;
   const [{ isLoading, response, error }, createFetchOptions] = useFetch(URL);
   let countPages = 1;
+  let paramsPage = +useParams().page;
 
   useEffect(() => {
     createFetchOptions();
-  }, [createFetchOptions, page]);
+    setPage((page) => paramsPage);
+    console.log("useParams >>> ", paramsPage);
+  }, [createFetchOptions, paramsPage]);
 
   if (response) countPages = Math.ceil(response.articlesCount / limit);
 
   const feedList = response
-    ? response.articles.map((item) => {
-        return <Feed key={item.title} article={item} />;
+    ? response.articles.map((item, ind) => {
+        return <Feed key={ind} article={item} />;
       })
     : null;
-  const handlerPagination = (currentPage) => {
-    setPage((page) => currentPage);
-    console.log("page >> ", page);
-  };
+  // const handlerPagination = (currentPage) => {
+  //   setPage((page) => currentPage);
+  //   console.log("page >> ", page);
+  // };
 
   return (
     <div className="home-page">
@@ -41,14 +46,17 @@ function GlobalFeed() {
               <>
                 {feedList}
                 <Pagination
-                  handler={handlerPagination}
+                  url={"/articles"}
+                  // handler={handlerPagination}
                   currentPage={page}
                   maxPages={countPages}
                 />
               </>
             )}
           </div>
-          <div className="col-md-3">Popular tags</div>
+          <div className="col-md-3">
+            <PopularTags />
+          </div>
         </div>
       </div>
     </div>

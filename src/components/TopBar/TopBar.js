@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
-import { createOutlineIcon } from "./icons";
+// import { createOutlineIcon } from "./icons";
 import logo from "../../create-outline.svg";
 import "./TopBar.css";
 
 function TopBar() {
   const [currentUserState] = useContext(UserContext);
-  console.log("first", currentUserState.currentUser);
+  // console.log("first", currentUserState.currentUser);
   return (
     <nav className="navbar navbar-light bg-dark-subtle">
       <div className="container">

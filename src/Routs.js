@@ -7,6 +7,7 @@ const Routs = () => {
   return (
     <Routes>
       <Route path="/" element={<GlobalFeed />} />
+      <Route path="/articles/:page" element={<GlobalFeed />} />
       <Route path="/article" element={<Article />} />
       <Route path="/login" element={<Auth />} />
       <Route path="/register" element={<Auth />} />

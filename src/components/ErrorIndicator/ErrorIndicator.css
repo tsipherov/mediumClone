@@ -1,0 +1,17 @@
+.error-indicator {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #db1212;
+}
+
+.error-indicator img {
+  margin-bottom: 1rem;
+  max-width: 4rem;
+  max-height: 4rem;
+}
+
+.error-indicator .boom {
+  font-size: 1.7rem;
+}

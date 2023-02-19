@@ -1,8 +1,9 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./Pagination.css";
 
-const Pagination = ({ handler, currentPage, maxPages }) => {
-  console.log("mamaxPages: ", maxPages);
+const Pagination = ({ currentPage, maxPages, url }) => {
+  // console.log("mamaxPages: ", maxPages);
   let styleDisabledMin = currentPage === 1 ? "page-item disabled" : "page-item";
 
   let styleDisabledMax =
@@ -12,46 +13,48 @@ const Pagination = ({ handler, currentPage, maxPages }) => {
       <span>page {currentPage}</span>
       <ul
         className="pagination  justify-content-center"
-        onClick={(e) => {
-          console.log("Click >>> ", Number(e.target.dataset.value));
-          if (e.target.dataset.value) handler(Number(e.target.dataset.value));
-        }}
+        // onClick={(e) => {
+        //   // console.log("Click >>> ", Number(e.target.dataset.value));
+        //   if (e.target.dataset.value) handler(Number(e.target.dataset.value));
+        // }}
       >
-        <li
+        <NavLink
+          to={`${url}/${1}`}
           className={styleDisabledMin}
-          onClick={() => {
-            if (currentPage > 1) handler(--currentPage);
-          }}
+          // onClick={() => {
+          //   if (currentPage > 1) handler(--currentPage);
+          // }}
         >
           <span className="page-link" aria-label="Previous">
             &laquo;
           </span>
-        </li>
-        <li className={styleDisabledMin}>
+        </NavLink>
+        <NavLink to={`${url}/${currentPage - 1}`} className={styleDisabledMin}>
           <span className="page-link" data-value={currentPage - 1}>
             {currentPage - 1}
           </span>
-        </li>
-        <li className="page-item active">
+        </NavLink>
+        <NavLink to={`${url}/${currentPage}`} className="page-item active">
           <span className="page-link" data-value={currentPage}>
             {currentPage}
           </span>
-        </li>
-        <li className={styleDisabledMax}>
+        </NavLink>
+        <NavLink to={`${url}/${currentPage + 1}`} className={styleDisabledMax}>
           <span className="page-link" data-value={currentPage + 1}>
             {currentPage + 1}
           </span>
-        </li>
-        <li
+        </NavLink>
+        <NavLink
+          to={`${url}/${maxPages}`}
           className={styleDisabledMax}
-          onClick={() => {
-            handler(++currentPage);
-          }}
+          // onClick={() => {
+          //   handler(++currentPage);
+          // }}
         >
           <span className="page-link" aria-label="Next">
             &raquo;
           </span>
-        </li>
+        </NavLink>
       </ul>
     </nav>
   );
