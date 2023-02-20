@@ -4,6 +4,7 @@ import "./Pagination.css";
 
 const Pagination = ({ currentPage, maxPages, url }) => {
   // console.log("mamaxPages: ", maxPages);
+  console.log("url >>> ", url);
   let styleDisabledMin = currentPage === 1 ? "page-item disabled" : "page-item";
 
   let styleDisabledMax =
@@ -34,7 +35,7 @@ const Pagination = ({ currentPage, maxPages, url }) => {
             {currentPage - 1}
           </span>
         </NavLink>
-        <NavLink to={`${url}/${currentPage}`} className="page-item active">
+        <NavLink to={`${url}/${currentPage}`} className="page-item">
           <span className="page-link" data-value={currentPage}>
             {currentPage}
           </span>

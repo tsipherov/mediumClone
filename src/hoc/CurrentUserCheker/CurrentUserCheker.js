@@ -14,7 +14,7 @@ const CurrentUserCheker = ({ children }) => {
     }
     createFetchOptions();
     setUserState((state) => ({ ...state, isLoading: true }));
-  }, []);
+  }, [createFetchOptions, setUserState, token]);
 
   useEffect(() => {
     if (!response) return;
@@ -24,8 +24,8 @@ const CurrentUserCheker = ({ children }) => {
       isLogedIn: true,
       currentUser: response.user,
     }));
-  }, [response]);
-  console.log("CurrentUserCheker: ", response);
+  }, [response, setUserState]);
+  // console.log("CurrentUserCheker: ", response);
 
   return children;
 };

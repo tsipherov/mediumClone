@@ -25,7 +25,11 @@ const PopularTags = () => {
       <p>Popular tags</p>
       <div className="tag-list">
         {response.tags.map((tag) => (
-          <Link to={`/tags/${tag}`} className="tag-default tag-pill" key={tag}>
+          <Link
+            to={`/tags/${tag}/1`}
+            className="tag-default tag-pill"
+            key={tag}
+          >
             {tag}
           </Link>
         ))}

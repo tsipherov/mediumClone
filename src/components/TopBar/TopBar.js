@@ -11,12 +11,12 @@ function TopBar() {
   return (
     <nav className="navbar navbar-light bg-dark-subtle">
       <div className="container">
-        <Link to="/" className="navbar-brand">
+        <Link to="/articles/1" className="navbar-brand">
           Medium
         </Link>
         <ul className="navbar-nav flex-row pull-xs-right">
           <li className="nav-item">
-            <NavLink to="/" className="nav-link">
+            <NavLink to="/articles/1" className="nav-link">
               Home
             </NavLink>
           </li>
