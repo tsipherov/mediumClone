@@ -24,7 +24,7 @@ function TopBar() {
             <>
               <li className="nav-item ">
                 <NavLink
-                  to="/articles/new"
+                  to="/article/new"
                   className="nav-link d-flex align-items-center"
                 >
                   <img
