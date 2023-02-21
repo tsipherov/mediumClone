@@ -16,24 +16,28 @@ const PopularTags = () => {
     return <ErrorIndicator />;
   }
 
-  if (isLoading || !response) {
-    return <Spinner />;
-  }
+  // if (isLoading || !response) {
+  //   return <Spinner />;
+  // }
 
   return (
     <div className="sidebar">
       <p>Popular tags</p>
-      <div className="tag-list">
-        {response.tags.map((tag) => (
-          <Link
-            to={`/tags/${tag}/1`}
-            className="tag-default tag-pill"
-            key={tag}
-          >
-            {tag}
-          </Link>
-        ))}
-      </div>
+      {isLoading && !response ? (
+        <Spinner />
+      ) : (
+        <div className="tag-list">
+          {response?.tags.map((tag) => (
+            <Link
+              to={`/tags/${tag}/1`}
+              className="tag-default tag-pill"
+              key={tag}
+            >
+              {tag}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

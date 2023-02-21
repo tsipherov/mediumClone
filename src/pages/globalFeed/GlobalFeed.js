@@ -4,39 +4,40 @@ import Feed from "../../components/Feed/Feed";
 import FeedToggler from "../../components/FeedToggler/FeedToggler";
 import Pagination from "../../components/Pagination/Pagination";
 import PopularTags from "../../components/PopularTags/PopularTags";
+import Spinner from "../../components/Spinner/Spinner";
 import { useFetch } from "../../hooks/useFetch";
 
 function GlobalFeed() {
   const [page, setPage] = useState(1);
   const [tag, setTag] = useState("");
-  console.log("tag >>> ", tag);
-  console.log("page >>> ", page);
-  const limit = 50;
+  // console.log("tag >>> ", tag);
+  // console.log("page >>> ", page);
+  const limit = 10;
   const location = useLocation().pathname;
-  console.log("location >>> ", location);
+  // console.log("location >>> ", location);
   const URL = `/articles${
     location === "/feed" ? "/feed" : ""
   }?limit=${limit}&offset=${(page - 1) * limit}${tag ? "&tag=" + tag : ""}`;
   const [{ isLoading, response, error }, createFetchOptions] = useFetch(URL);
   let countPages = 1;
   let paramsPage = +useParams().page;
-  console.log("paramsPage >>> ", paramsPage);
+  // console.log("paramsPage >>> ", paramsPage);
   let paramsTag = useParams().tag;
-  console.log("paramsTag >>> ", paramsTag);
+  // console.log("paramsTag >>> ", paramsTag);
   let articles = [];
   let feedList = [];
 
   useEffect(() => {
     createFetchOptions();
     if (paramsPage) setPage((page) => paramsPage);
-    console.log("useParams >>> ", paramsPage);
+    // console.log("useParams >>> ", paramsPage);
   }, [createFetchOptions, paramsPage]);
 
   useEffect(() => {
     createFetchOptions();
     setTag((tag) => paramsTag);
     setPage(1);
-    console.log("useParams >>> ", paramsTag);
+    // console.log("useParams >>> ", paramsTag);
   }, [paramsTag, createFetchOptions]);
 
   if (response) {
@@ -56,7 +57,7 @@ function GlobalFeed() {
     feedList = articles.map((item, ind) => {
       return <Feed key={ind} article={item} />;
     });
-    console.log("countPages >>> ", countPages);
+    // console.log("countPages >>> ", countPages);
   }
 
   return (
@@ -69,7 +70,8 @@ function GlobalFeed() {
         <div className="row">
           <div className="col-md-9">
             <FeedToggler tagName={tag} page={page} />
-            {isLoading && <div className="article-preview">Loading...</div>}
+            {isLoading && <Spinner />}
+            {/* {isLoading && <div className="article-preview">Loading...</div>} */}
             {error && <div>Some error happened</div>}
             {!isLoading && response && (
               <>
@@ -77,7 +79,6 @@ function GlobalFeed() {
                 {countPages > 1 ? (
                   <Pagination
                     url={tag ? `/tags/${tag}` : "/articles"}
-                    // handler={handlerPagination}
                     currentPage={page}
                     maxPages={countPages}
                   />

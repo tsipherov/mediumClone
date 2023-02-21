@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Article from "./pages/articles/Article";
+import Article from "./pages/Article/Article";
 import Auth from "./pages/Auth/Auth";
 import GlobalFeed from "./pages/globalFeed/GlobalFeed";
 
@@ -12,7 +12,7 @@ const Routs = () => {
       <Route path="/articles" element={<GlobalFeed />} />
       <Route path="/tags/:tag" element={<GlobalFeed />} />
       <Route path="/tags/:tag/:page" element={<GlobalFeed />} />
-      <Route path="/article" element={<Article />} />
+      <Route path="/article/:slag" element={<Article />} />
       <Route path="/login" element={<Auth />} />
       <Route path="/register" element={<Auth />} />
     </Routes>
