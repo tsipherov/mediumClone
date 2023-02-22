@@ -1,23 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ArticleForm from "../../components/ArticleForm/ArticleForm";
 import { useFetch } from "../../hooks/useFetch";
 
 const CreateArticle = () => {
   const submitURL = "/articles";
-  const [{ error }, createFetchOptions] = useFetch(submitURL);
+  const [{ error, response }, createFetchOptions] = useFetch(submitURL);
   let initialValues = {
-    title: "title",
-    description: "descript",
-    body: "article text",
-    tagList: "tag",
+    title: "",
+    description: "",
+    body: "",
+    tagList: ["foo", "bar", "asd"],
   };
+  const navigate = useNavigate();
   const onSubmit = (article) => {
-    console.log("onSubmit >>> ", article);
     createFetchOptions({
       method: "POST",
-      body: article,
+      data: { article },
     });
   };
+  useEffect(() => {
+    if (response?.article?.slug) navigate(`/article/${response.article.slug}`);
+  }, [response]);
 
   return (
     <div>

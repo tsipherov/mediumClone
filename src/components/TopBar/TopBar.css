@@ -1,5 +1,11 @@
-.link-icon {
+/* .link-icon {
   display: block;
-  width: 25px;
-  height: 25px;
+  width: 18px;
+  height: 18px;
+  color: rgba(0, 0, 0, 0.3) !important;
+} */
+
+.user-pic {
+  width: 20px;
+  height: 20px !important;
 }

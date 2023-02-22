@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Article from "./pages/Article/Article";
 import Auth from "./pages/Auth/Auth";
 import CreateArticle from "./pages/CreateArticle/CreateArticle";
@@ -7,7 +7,7 @@ import GlobalFeed from "./pages/globalFeed/GlobalFeed";
 const Routs = () => {
   return (
     <Routes>
-      <Route path="/" element={<GlobalFeed />} />
+      <Route path="/" element={<Navigate to="/articles/1" />} />
       <Route path="/feed" element={<GlobalFeed />} />
       <Route path="/articles/:page" element={<GlobalFeed />} />
       {/* <Route path="/articles" element={<GlobalFeed />} /> */}

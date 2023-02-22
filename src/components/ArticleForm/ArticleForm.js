@@ -8,16 +8,16 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
   const [tagList, setTagList] = useState("");
 
   useEffect(() => {
-    setBody(initialValues.body);
-    setDescription(initialValues.description);
-    setTitle(initialValues.title);
-    setTagList(initialValues.tagList);
+    !body && setBody(initialValues.body);
+    !description && setDescription(initialValues.description);
+    !title && setTitle(initialValues.title);
+    !tagList && setTagList(initialValues.tagList.join(" "));
   }, [initialValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    onSubmit({ title, description, body, tagList });
+    console.log("tagList >>> ", tagList);
+    onSubmit({ title, description, body, tagList: tagList.split(/[,\s-_]/g) });
   };
 
   return (
