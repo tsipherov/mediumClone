@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import BackendErrorMessage from "../BackendErrorMessage/BackendErrorMessage";
 
 const ArticleForm = ({ onSubmit, errors, initialValues }) => {
+  console.log("errors >>> ", errors);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [body, setBody] = useState("");
@@ -17,7 +18,7 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("tagList >>> ", tagList);
-    onSubmit({ title, description, body, tagList: tagList.split(/[,\s-_]/g) });
+    onSubmit({ title, description, body, tagList: tagList.split(/[\s]/g) });
   };
 
   return (

@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Article from "./pages/Article/Article";
 import Auth from "./pages/Auth/Auth";
 import CreateArticle from "./pages/CreateArticle/CreateArticle";
+import EditArticle from "./pages/EditArticle/EditArticle";
 import GlobalFeed from "./pages/globalFeed/GlobalFeed";
 
 const Routs = () => {
@@ -10,11 +11,11 @@ const Routs = () => {
       <Route path="/" element={<Navigate to="/articles/1" />} />
       <Route path="/feed" element={<GlobalFeed />} />
       <Route path="/articles/:page" element={<GlobalFeed />} />
-      {/* <Route path="/articles" element={<GlobalFeed />} /> */}
       <Route path="/tags/:tag" element={<GlobalFeed />} />
       <Route path="/tags/:tag/:page" element={<GlobalFeed />} />
       <Route path="/article/new" element={<CreateArticle />} />
       <Route path="/article/:slag" element={<Article />} />
+      <Route path="/article/:slag/edit" element={<EditArticle />} />
       <Route path="/login" element={<Auth />} />
       <Route path="/register" element={<Auth />} />
     </Routes>

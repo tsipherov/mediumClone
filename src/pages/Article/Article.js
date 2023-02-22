@@ -1,19 +1,44 @@
-import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ErrorIndicator from "../../components/ErrorIndicator/ErrorIndicator";
 import Spinner from "../../components/Spinner/Spinner";
 import TagList from "../../components/TagList/TagList";
+import { UserContext } from "../../contexts/userContext";
 import { useFetch } from "../../hooks/useFetch";
 
 function Article(props) {
-  console.log("props >>> ", props);
+  // console.log("props >>> ", props);
+  const navigate = useNavigate();
+  const [userState] = useContext(UserContext);
   const slag = useParams().slag;
   const URL = `/articles/${slag}`;
+
   const [{ isLoading, response, error }, createFetchOptions] = useFetch(URL);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const isAuthor = () => {
+    if (!userState.isLogedIn || !response) {
+      // console.log("userState >>> ", userState);
+      return false;
+    }
+
+    return userState.currentUser.username === response.article.author.username;
+  };
+
+  const deleteArticle = () => {
+    createFetchOptions({
+      method: "DELETE",
+    });
+    setIsDeleting(true);
+  };
+
+  if (isDeleting && !error) {
+    navigate("/");
+  }
 
   useEffect(() => {
     createFetchOptions();
   }, [createFetchOptions]);
+
   return (
     <div className="article-page">
       <div className="banner">
@@ -30,6 +55,24 @@ function Article(props) {
                 </Link>
                 <span className="date">{response.article.createdAt}</span>
               </div>
+              {isAuthor() && (
+                <span>
+                  <Link
+                    to={`/article/${slag}/edit`}
+                    className="btn btn-outline-secondary btn-sm"
+                  >
+                    <i className="ion-edit"></i>
+                    Edit Article
+                  </Link>
+                  <button
+                    className="btn btn-outline-danger btn-sm"
+                    onClick={deleteArticle}
+                  >
+                    <i className="ion-trash-a"></i>
+                    Delete Article
+                  </button>
+                </span>
+              )}
             </div>
           </div>
         )}

@@ -36,7 +36,7 @@ export const useFetch = (url) => {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log("err: ", err);
+        // console.log("err: ", err);
         setError(err.response.data);
         setIsLoading(false);
       });
