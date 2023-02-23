@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
 // import { createOutlineIcon } from "./icons";
@@ -7,6 +7,12 @@ import "./TopBar.css";
 
 function TopBar() {
   const [currentUserState] = useContext(UserContext);
+  const [currentUser, setCurrentUser] = useState({});
+  const [isLogedIn, setIsLogedIn] = useState(false);
+  useEffect(() => {
+    setCurrentUser(currentUserState.currentUser);
+    setIsLogedIn(currentUserState.isLogedIn);
+  }, [currentUserState]);
   // console.log("first", currentUserState.currentUser);
   return (
     <nav className="navbar navbar-light bg-dark-subtle">
@@ -20,34 +26,32 @@ function TopBar() {
               Home
             </NavLink>
           </li>
-          {currentUserState.isLogedIn ? (
+          {isLogedIn ? (
             <>
               <li className="nav-item ">
-                <NavLink
-                  to="/article/new"
-                  className="nav-link" //d-flex align-items-center"
-                >
-                  {/* <img
-                    src={logo}
-                    className="link-icon ion-compose"
-                    alt="logo"
-                  /> */}
+                <NavLink to="/article/new" className="nav-link">
                   <i className="ion-compose" />
                   &nbsp; New Post
                 </NavLink>
               </li>
+              <li className="nav-item ">
+                <NavLink to="/settings" className="nav-link">
+                  <i className="ion-gear-a" />
+                  &nbsp; Settings
+                </NavLink>
+              </li>
               <li className="nav-item">
                 <NavLink
-                  to={`/profiles/${currentUserState.currentUser.username}`}
+                  to={`/profiles/${currentUser.username}`}
                   className="nav-link d-flex align-items-center"
                 >
                   <img
                     className="user-pic"
-                    src={currentUserState.currentUser.image}
+                    src={currentUser.image}
                     alt="user avatar"
                   />
                   {/* &nbsp; */}
-                  {currentUserState.currentUser.username}
+                  {currentUser.username}
                 </NavLink>
               </li>
             </>

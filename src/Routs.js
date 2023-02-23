@@ -4,6 +4,7 @@ import Auth from "./pages/Auth/Auth";
 import CreateArticle from "./pages/CreateArticle/CreateArticle";
 import EditArticle from "./pages/EditArticle/EditArticle";
 import GlobalFeed from "./pages/globalFeed/GlobalFeed";
+import Settings from "./pages/Settings/Settings";
 
 const Routs = () => {
   return (
@@ -16,6 +17,7 @@ const Routs = () => {
       <Route path="/article/new" element={<CreateArticle />} />
       <Route path="/article/:slag" element={<Article />} />
       <Route path="/article/:slag/edit" element={<EditArticle />} />
+      <Route path="/settings" element={<Settings />} />
       <Route path="/login" element={<Auth />} />
       <Route path="/register" element={<Auth />} />
     </Routes>

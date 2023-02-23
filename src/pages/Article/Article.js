@@ -25,6 +25,8 @@ function Article(props) {
   };
 
   const deleteArticle = () => {
+    if (!isAuthor())
+      throw new Error("An article can only be deleted by its author!");
     createFetchOptions({
       method: "DELETE",
     });
@@ -49,27 +51,30 @@ function Article(props) {
               <Link to={`/profiles/${response.article.author.username}`}>
                 <img src={response.article.author.image} alt="" />
               </Link>
-              <div className="info">
-                <Link to={`/profiles/${response.article.author.username}`}>
+              <div className="info mx-3">
+                <Link
+                  to={`/profiles/${response.article.author.username}`}
+                  className="fw-bold fs-5"
+                >
                   {response.article.author.username}
                 </Link>
-                <span className="date">{response.article.createdAt}</span>
+                <span className="date mt-1">{response.article.createdAt}</span>
               </div>
               {isAuthor() && (
                 <span>
                   <Link
                     to={`/article/${slag}/edit`}
-                    className="btn btn-outline-secondary btn-sm"
+                    className="btn btn-outline-secondary btn-sm mx-3"
                   >
                     <i className="ion-edit"></i>
-                    Edit Article
+                    &nbsp; Edit Article
                   </Link>
                   <button
                     className="btn btn-outline-danger btn-sm"
                     onClick={deleteArticle}
                   >
                     <i className="ion-trash-a"></i>
-                    Delete Article
+                    &nbsp; Delete Article
                   </button>
                 </span>
               )}

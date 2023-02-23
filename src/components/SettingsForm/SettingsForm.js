@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
 import BackendErrorMessage from "../BackendErrorMessage/BackendErrorMessage";
 
-const ArticleForm = ({ onSubmit, errors, initialValues }) => {
+const SettingsForm = ({ onSubmit, errors, initialValues }) => {
   console.log("errors >>> ", errors);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [body, setBody] = useState("");
-  const [tagList, setTagList] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [userName, setUserName] = useState("");
+  const [about, setAbout] = useState("");
+  const [email, setEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   useEffect(() => {
-    !body && setBody(initialValues.body);
-    !description && setDescription(initialValues.description);
-    !title && setTitle(initialValues.title);
-    !tagList && setTagList(initialValues.tagList.join(" "));
+    !email && setEmail(initialValues.email);
+    !userName && setUserName(initialValues.userName);
+    !avatar && setAvatar(initialValues.avatar);
+    !about && setAbout(initialValues.about);
   }, [initialValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ title, description, body, tagList: tagList.split(/[\s]/g) });
+    onSubmit({
+      image: avatar,
+      username: userName,
+      bio: about,
+      email,
+      password: newPassword,
+    });
   };
 
   return (
@@ -25,6 +32,7 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
       <div className="container page">
         <div className="row">
           <div className="col-md-10 offset-md-1 col-xs-12">
+            <h1 className="text-center">User Settings</h1>
             {errors && <BackendErrorMessage backendError={errors} />}
             <form onSubmit={handleSubmit}>
               <fieldset>
@@ -32,36 +40,45 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Article title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="User Image"
+                    value={avatar}
+                    onChange={(e) => setAvatar(e.target.value)}
                   />
                 </fieldset>
                 <fieldset className="form-group">
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="What is this article about?"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Enter User Name"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
                   />
                 </fieldset>
                 <fieldset className="form-group">
                   <textarea
                     className="form-control"
                     rows="8"
-                    placeholder="Write your article (in markdown)"
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
+                    placeholder="Short bio about you"
+                    value={about}
+                    onChange={(e) => setAbout(e.target.value)}
                   ></textarea>
                 </fieldset>
                 <fieldset className="form-group">
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Enter tags"
-                    value={tagList}
-                    onChange={(e) => setTagList(e.target.value)}
+                    placeholder="Enter your e-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </fieldset>
+                <fieldset className="form-group">
+                  <input
+                    type="password"
+                    className="form-control form-control-lg"
+                    placeholder="Enter new password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
                   />
                 </fieldset>
                 <fieldset className="form-group">
@@ -69,7 +86,7 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
                     type="submit"
                     className="btn btn-lg pull-xs-right btn-primary"
                   >
-                    Publish Article
+                    Update Settings
                   </button>
                 </fieldset>
               </fieldset>
@@ -81,4 +98,4 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
   );
 };
 
-export default ArticleForm;
+export default SettingsForm;
