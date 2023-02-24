@@ -49,7 +49,7 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
                 <fieldset className="form-group">
                   <textarea
                     className="form-control"
-                    rows="8"
+                    rows="14"
                     placeholder="Write your article (in markdown)"
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
