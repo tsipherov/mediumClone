@@ -5,6 +5,7 @@ import CreateArticle from "./pages/CreateArticle/CreateArticle";
 import EditArticle from "./pages/EditArticle/EditArticle";
 import GlobalFeed from "./pages/globalFeed/GlobalFeed";
 import Settings from "./pages/Settings/Settings";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 const Routs = () => {
   return (
@@ -17,6 +18,9 @@ const Routs = () => {
       <Route path="/article/new" element={<CreateArticle />} />
       <Route path="/article/:slag" element={<Article />} />
       <Route path="/article/:slag/edit" element={<EditArticle />} />
+      <Route path="/profiles/:user" element={<UserProfile />} />
+      <Route path="/profiles/:user/favorites" element={<UserProfile />} />
+      <Route path="/profile/:user/favorites/:page" element={<UserProfile />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/login" element={<Auth />} />
       <Route path="/register" element={<Auth />} />

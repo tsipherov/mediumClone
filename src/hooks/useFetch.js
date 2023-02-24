@@ -31,7 +31,7 @@ export const useFetch = (url) => {
     // console.log("options: ", options);
     axios(baseUrl + url, options)
       .then((res) => {
-        console.log("axios response >>> ", res.data);
+        // console.log("axios response >>> ", res.data);
         setResponse(res.data);
         setIsLoading(false);
       })

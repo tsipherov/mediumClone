@@ -4,7 +4,7 @@ import "./Pagination.css";
 
 const Pagination = ({ currentPage, maxPages, url }) => {
   // console.log("mamaxPages: ", maxPages);
-  console.log("url >>> ", url);
+  // console.log("url >>> ", url);
   let styleDisabledMin = currentPage === 1 ? "page-item disabled" : "page-item";
 
   let styleDisabledMax =

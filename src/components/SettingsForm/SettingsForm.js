@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BackendErrorMessage from "../BackendErrorMessage/BackendErrorMessage";
 
 const SettingsForm = ({ onSubmit, errors, initialValues }) => {
-  console.log("errors >>> ", errors);
+  // console.log("errors >>> ", errors);
   const [avatar, setAvatar] = useState("");
   const [userName, setUserName] = useState("");
   const [about, setAbout] = useState("");

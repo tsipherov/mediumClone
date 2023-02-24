@@ -4,7 +4,7 @@ import { UserContext } from "../../contexts/userContext";
 
 const FeedToggler = ({ tagName, page }) => {
   const [userState] = useContext(UserContext);
-  console.log("userState >>> ", userState);
+  // console.log("userState >>> ", userState);
   return (
     <div className="feed-toggler">
       <ul className="nav nav-pills outline-active">

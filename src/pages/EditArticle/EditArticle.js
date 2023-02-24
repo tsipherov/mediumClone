@@ -21,13 +21,13 @@ const EditArticle = () => {
   };
 
   useEffect(() => {
-    console.log("useEffect on error >>> ", error);
+    // console.log("useEffect on error >>> ", error);
     setIsError(true);
   }, [error]);
 
   useEffect(() => {
     createFetchOptions();
-    console.log("first useEffect >>> ", response);
+    // console.log("first useEffect >>> ", response);
   }, []);
 
   if (response?.article) {
@@ -51,7 +51,7 @@ const EditArticle = () => {
 
   useEffect(() => {
     if (!error && edited && response?.article?.slug) {
-      console.log("second useEffect");
+      // console.log("second useEffect");
       navigate(`/article/${response.article.slug}`);
     }
   }, [response]);

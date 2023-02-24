@@ -11,7 +11,7 @@ const Settings = () => {
   const [edited, setEdited] = useState(false);
   const [isError, setIsError] = useState(false);
   const [userState] = useContext(UserContext);
-  console.log("userState >>> ", userState);
+  // console.log("userState >>> ", userState);
 
   let initialValues = {};
   useEffect(() => {
@@ -30,7 +30,7 @@ const Settings = () => {
   }
 
   useEffect(() => {
-    console.log("useEffect on error >>> ", error);
+    // console.log("useEffect on error >>> ", error);
     setIsError(true);
   }, [error]);
 
@@ -44,7 +44,7 @@ const Settings = () => {
 
   useEffect(() => {
     if (!error && edited && response?.user) {
-      console.log("second useEffect");
+      // console.log("second useEffect");
       navigate(`/`);
     }
   }, [response]);

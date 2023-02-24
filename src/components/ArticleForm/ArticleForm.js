@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BackendErrorMessage from "../BackendErrorMessage/BackendErrorMessage";
 
 const ArticleForm = ({ onSubmit, errors, initialValues }) => {
-  console.log("errors >>> ", errors);
+  // console.log("errors >>> ", errors);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [body, setBody] = useState("");
