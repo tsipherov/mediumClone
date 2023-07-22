@@ -23,7 +23,7 @@ const Auth = () => {
   const apiUrl = isLogin ? "/users/login" : "/users";
 
   const [{ isLoading, response, error }, createFetchOptions] = useFetch(apiUrl);
-  const [token, setToken] = useLocalStorage("token");
+  const [token, setToken] = useLocalStorage("medium_token");
 
   // console.log("cucurrentUser: ", currentUser);
   // console.log("error: ", error);

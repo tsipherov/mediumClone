@@ -47,6 +47,7 @@ function TopBar() {
                 >
                   <img
                     className="user-pic"
+                    // src="https://www.gravatar.com/avatar/86c9a73ce8f4e6eceed1a3ffeb4f2c37"
                     src={currentUser.image}
                     alt="user avatar"
                   />

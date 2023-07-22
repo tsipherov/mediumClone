@@ -10,7 +10,7 @@ export const useFetch = (url) => {
 
   const baseUrl = "https://conduit.productionready.io/api";
 
-  const [userToken] = useLocalStorage("token");
+  const [userToken] = useLocalStorage("medium_token");
   const createFetchOptions = useCallback(
     (options = {}) => {
       const requestOptions = {

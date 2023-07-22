@@ -6,7 +6,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 const CurrentUserCheker = ({ children }) => {
   const [{ response }, createFetchOptions] = useFetch("/user");
   const [, setUserState] = useContext(UserContext);
-  const [token] = useLocalStorage("token");
+  const [token] = useLocalStorage("medium_token");
   useEffect(() => {
     if (!token) {
       setUserState((state) => ({ ...state, isLogedIn: false }));
